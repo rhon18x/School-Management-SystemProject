@@ -1,0 +1,130 @@
+
+package school_management_system;
+
+
+public class Students {
+
+   private int idd, age,contact;
+    private String name, gender, course,mname,lname;
+
+ public Students(int idd, String name,String mname,String lname, String gender, int age, String course,int contact) {
+     
+         this.idd = idd;
+        this.name = name;
+ this.mname = mname;
+ this.lname = lname;
+        this.gender = gender;
+        this.age = age;
+        this.course = course;
+        
+         this.contact = contact;
+    }
+
+    public int getId() {
+
+        return this.idd;
+
+    }
+
+    public void setId(int idd) {
+
+        this.idd= idd;
+      
+
+    }
+
+    public String getName() {
+
+        return this.name;
+
+    }
+
+    public void setName(String name) {
+
+        this.name = name;
+
+    }
+    
+    
+  public String getMName() {
+
+        return this.mname;
+
+    }
+
+    public void setMName(String mname) {
+
+        this.mname = mname;
+
+    }
+    
+    
+    
+    
+     public String getLName() {
+
+        return this.lname;
+
+    }
+
+    public void setLName(String lname) {
+
+        this.lname = lname;
+
+    }
+    
+    
+    
+    
+    
+    
+    
+
+    public String getGender() {
+        return this.gender;
+
+    }
+
+    public void setGender(String gender) {
+
+        this.gender = gender;
+
+    }
+
+    public int getAge() {
+
+        return this.age;
+
+    }
+
+    public void setAge(int age) {
+
+        this.age = age;
+
+    }
+
+    public String getCourse() {
+
+        return this.course;
+
+    }
+
+    public void setCourse(String course) {
+
+        this.course = course;
+
+    }
+    
+    public int getContact() {
+
+        return this.contact;
+
+    }
+
+    public void setContact(int contact) {
+
+        this.contact = contact;
+
+    }
+
+}
