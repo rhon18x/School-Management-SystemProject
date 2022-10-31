@@ -1,0 +1,382 @@
+package school_management_system;
+
+import java.util.*;
+
+public class School_Management_System {
+
+    public static Scanner in = new Scanner(System.in).useDelimiter("\n");
+    public static int idd, age, input, option, contact, x, z = 0, y, xx;
+    public static String name, gender, course, Search, mname, lname;
+    public static boolean loop = true;
+
+    private static List<Students> studentList = new ArrayList<>();
+    public static Students students;
+
+    private static void addNewStudents(Students students) {
+
+        studentList.add(students);
+    }
+
+    private static void searchByName() {
+        x = 0;
+
+        do {
+            try {
+
+                System.out.println("\n--------Search Students By Name-------- ");
+                System.out.print("Enter Student Name: ");
+                name = in.next();
+
+                System.out.println("\n   --------"
+                        + "Student Details--------\n");
+                for (Students students : studentList) {
+
+                    if (students.getName().equalsIgnoreCase(name) || students.getMName().equalsIgnoreCase(name) || students.getLName().equalsIgnoreCase(name)) {
+
+                        System.out.println(
+                                "\n     Id: " + students.getId()
+                                + "\n     Name: " + students.getName() + " " + students.getMName() + " " + students.getLName()
+                                + "\n     Gender: " + students.getGender()
+                                + "\n     Age: " + students.getAge()
+                                + "\n     Course: " + students.getCourse()
+                                + "\n     Contact: " + students.getContact());
+                        z++;
+                    }
+                }
+
+                if (z == 0) {
+                    System.out.println("\nName not found!!!\n");
+
+                }
+
+                System.out.println("\n_______________________________________");
+                System.out.println("\nDo you want to search other Students by Name?   [1] Yes [2] No");
+                z = 0;
+
+                do {
+                    try {
+
+                        System.out.println("Enter choice: ");
+
+                        x = in.nextInt();
+
+                        while (x != 1 && x != 2) {
+                            System.out.println("\n\nInvalid Choice!!! Try Again!!!\nEnter choice: ");
+
+                            x = in.nextInt();
+                        }
+                        if (x == 1) {
+                            searchByName();
+                        }
+                        if (x == 2) {
+                            mainfunction();
+                        }
+
+                        loop = false;
+                    } catch (Exception e) {
+
+                        System.out.println("\n\nIncorrect Age! Try Again!!!");
+                        in.next();
+                        loop = true;
+
+                    }
+                } while (loop);
+
+                if (x == 1) {
+                    searchByName();
+                }
+                if (x == 2) {
+                    mainfunction();
+                }
+
+            } catch (Exception e) {
+                System.out.println("Incorrect Input!! Try Again!!");
+                loop = true;
+                in.nextLine();
+
+            }
+        } while (loop);
+        System.out.println("Value of x: " + x);
+
+    }
+
+    private static void removeStudentByIdd() {
+        try {
+            Set<Integer> uniqueID = new HashSet<>();
+            System.out.println("----------Remove Student by Id----------");
+
+            System.out.println("Enter ID:  ");
+            idd = in.nextInt();
+
+            for (Students students : studentList) {
+
+                if (students.getId() == idd) {
+
+                    if (students.getId() == idd) {
+                        System.out.println("\n\nAre you sure you want to remove student ID: " + idd + "\n[1] Yes      [2]No\n\n");
+                        do {
+                            x = in.nextInt();
+
+                            switch (x) {
+                                case 1:
+                                    studentList.remove(students);
+                                    uniqueID.add(idd);
+                                    System.out.println("\n------------------------------\n\n");
+                                    System.out.println("Successfully Removed Student by ID! ");
+                                    System.out.println("\n_____________________________________\n\n");
+                                    mainfunction();
+                                    break;
+
+                                case 2:
+                                    System.out.println("\n------------------------------\n\n");
+                                    System.out.println("Removed Student by ID Cancelled! ");
+                                    System.out.println("\n_____________________________________\n\n");
+                                    mainfunction();
+                                    break;
+
+                            }
+                        } while (x != 1 && x != 2);
+                    }
+                }
+
+            }
+
+            System.out.println("\n\nIncorrect Id Try Again!!!");
+            System.out.println("--------------------------------------------------------");
+            mainfunction();
+        } catch (Exception e) {
+
+            System.out.print("\n\n\nIncorrect Input!! Try Again!!");
+
+        }
+
+    }
+
+    private static void showAllStudentEnrolled() {
+
+        System.out.println("_______________________________________");
+        System.out.println("\n\n   ----------Student List-------------     ");
+        for (Students students : studentList) {
+
+            System.out.println("\n     Id: " + students.getId()
+                    + "\n     Name: " + students.getName() + " " + students.getMName() + " " + students.getLName()
+                    + "\n     Gender: " + students.getGender()
+                    + "\n     Age: " + students.getAge()
+                    + "\n     Course: " + students.getCourse()
+                    + "\n     Contact #: " + students.getContact());
+
+        }
+        System.out.println("_______________________________________");
+
+        //  mainfunction();
+    }
+
+    private static void option() {
+
+        System.out.println("\n\n_______________________________________\n~~Welcome to School Management System~~\n\n      Option"
+                + "\n         [1]New Student"
+                + "\n         [2]Show all List"
+                + "\n         [3]Search by Name"
+                + "\n         [4]Remove by Id"
+                + "\n         [5]Exit\n_______________________________________");
+    }
+
+    public static void ExistingF() {
+
+        Random q = new Random();
+        Set<Integer> uniqueID = new HashSet<>();
+
+        while (uniqueID.size() < 1) {
+            uniqueID.add(q.nextInt(1000));
+
+        }
+
+        for (Integer id : uniqueID) {
+
+            idd = id;
+
+        }
+        idd = 1;
+
+        Students student1 = new Students(idd++, "Rhon", "M", "Trazo", "Male", 19, "BSIT", 961);
+        Students student2 = new Students(idd++, "Dexter", "P", "Maghanoy", "Male", 22, "BSIT", 965);
+        Students student3 = new Students(idd++, "Althea", "A", "Dewites", "Female", 19, "BSIT", 972);
+
+        studentList.add(student1);
+        studentList.add(student2);
+        studentList.add(student3);
+        for (x = 1; x <= 10; x++) {
+            Students student4 = new Students(idd++, "Student", "I", "Am", "Female", 19, "BSIT", 972);
+            studentList.add(student4);
+        }
+        mainfunction();
+
+    }
+
+    private static Students inputNewStudents() {
+
+        Random q = new Random();
+        Set<Integer> uniqueID = new HashSet<>();
+
+        while (uniqueID.size() < 1) {
+            uniqueID.add(q.nextInt(1000));
+        }
+        for (Integer id : uniqueID) {
+
+            idd = id;
+        }
+
+        System.out.println("\n-----------Input New Students-----------\n");
+        System.out.println("Student ID: " + idd);
+
+        System.out.println("Enter Student First Name: ");
+
+        name = in.next();
+        System.out.println("Enter Student Middle Name: ");
+
+        mname = in.next();
+        System.out.println("Enter Student Last Name: ");
+
+        lname = in.next();
+
+        do {
+            try {
+
+                System.out.println("Enter Student Age: ");
+
+                age = in.nextInt();
+
+                loop = false;
+            } catch (Exception e) {
+
+                System.out.println("\n\nIncorrect Age! Try Again!!!");
+                in.next();
+                loop = true;
+
+            }
+        } while (loop);
+
+        System.out.println("Enter Student Gender: ");
+
+        gender = in.next();
+
+        System.out.println("Enter Student Course: ");
+
+        course = in.next();
+
+        do {
+            try {
+
+                System.out.println("Enter Student Contact number: ");
+
+                contact = in.nextInt();
+
+                loop = false;
+            } catch (Exception e) {
+
+                System.out.println("\n\nIncorrect Contact Number! Try Again!!!");
+                loop = true;
+                in.next();
+
+            }
+
+        } while (loop);
+
+        Students students = new Students(idd, name, mname, lname, gender, age, course, contact);
+        System.out.println("\nStudent Successfully Added!");
+
+        do {
+            try {
+                System.out.println("Do you want to add new student? [1] Yes      [2] No");
+                System.out.print("Enter choice: ");
+                y = in.nextInt();
+
+                while (y != 1 && y != 2) {
+
+                    System.out.println("Invalid choice!! Try Again!!");
+                    System.out.print("Enter choice: ");
+                    y = in.nextInt();
+                }
+                if (y == 1) {  
+                    addNewStudents(students);
+                    students = inputNewStudents();
+                  
+                } else if (y == 2) {
+
+                    addNewStudents(students);
+                    mainfunction();
+                }
+
+            } catch (Exception e) {
+
+                System.out.println("Invalid Input!! Try Again!!");
+                in.next();
+                loop = true;
+
+            }
+        } while (loop);
+
+        return students;
+    }
+
+    private static void mainfunction() {
+        do {
+            try {
+                do {
+
+                    option();
+                    System.out.print("   Enter: ");
+                    input = in.nextInt();
+                    System.out.print("\n");
+                    switch (input) {
+                        case 1:
+
+                            Students students = inputNewStudents();
+
+                            addNewStudents(students);
+
+                            break;
+
+                        case 2:
+
+                            showAllStudentEnrolled();
+
+                            break;
+                        case 3:
+
+                            searchByName();
+                            break;
+                        case 4:
+
+                            removeStudentByIdd();
+
+                            break;
+                        case 5:
+
+                            System.exit(0);
+
+                            break;
+                        default:
+
+                            System.out.print("\n\n\nInput invalid!! Try Again!!\n");
+
+                            break;
+                    }
+
+                } while (input != 5);
+
+            } catch (Exception e) {
+
+                System.out.print("\n\n\nIncorrect Input!! Try Again!!\n");
+                in.next();
+                loop = true;
+            }
+        } while (loop);
+    }
+
+    public static void main(String[] args) {
+        ExistingF();
+
+    }
+
+}
